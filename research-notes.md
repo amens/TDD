@@ -95,7 +95,7 @@ The requirements above may also be seen as weaknesses.
  - Seeing hundreds or thousands of passing tests can create a sense of false
    security. \[[4][4]\]
  - Even trivially changing or heavily refactoring the functional code can
-   involve rewriting hundreds or even thousands of tests. \[[4][4], [5][5]\]
+   involve rewriting hundreds or even thousands of tests. \[[4][4]\] \[[5][5]\]
  - Requires a huge investment in time to *get into it*, thus it also
    requires a lot of discipline. This can be hard to sell to other
    developers. \[[5][5]\]
