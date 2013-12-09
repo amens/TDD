@@ -1,7 +1,7 @@
 Test Driven Development Research Notes
 ======================================
 
-Uncle Bob's Three Laws of TDD [[1]][1]
+Uncle Bob's Three Laws of TDD \[[1][1]\]
 --------------------------------------
 
  1. You are not allowed to write any production code unless it is to make
@@ -42,7 +42,7 @@ first development* (TFD) and *refactoring*.
 ### Side Effects
 
  - You are probably going to have more LOC for tests than for the functional
-   code. [[2]][2] [[3]][3]
+   code. \[[2][2]\] \[[3][3]\]
 
 ### Benefits and Strengths
 
@@ -56,26 +56,26 @@ first development* (TFD) and *refactoring*.
  - the ability to refactor at will, because the tests cover all the code
    paths and functions;
  - no fear of touching the code or deleting code, the code becomes malleable
-   (again) and makes it a lot *softer* again. [[1]][1]
+   (again) and makes it a lot *softer* again. \[[1][1]\]
 
 ### Requirements
 
 In order for TDD to really make sense, all the following points must hold.
 
- - You are writing code that is testable in a unit-test manner. [[4]][4]
+ - You are writing code that is testable in a unit-test manner. \[[4][4]\]
  - That what you are developing has an obvious approach and will not require
-   extensive prototyping or experimentation. [[4]][4]
+   extensive prototyping or experimentation. \[[4][4]\]
  - That you will not need to refactor too heavily or change the
    specification unless you have the time to repeatedly rewrite hundreds
-   or thousands of test cases. [[4]][4]
- - Nothing is sealed. [[4]][4]
- - Everything is modular. [[4]][4]
- - Everything is injectable or mockable. [[4]][4]
- - That there is something of benefit to test at a unit test level. [[4]][4]
+   or thousands of test cases. \[[4][4]\]
+ - Nothing is sealed. \[[4][4]\]
+ - Everything is modular. \[[4][4]\]
+ - Everything is injectable or mockable. \[[4][4]\]
+ - That there is something of benefit to test at a unit test level. \[[4][4]\]
  - The management and the development team must accept and apply TDD
-   thoroughly. [[4]][4]
+   thoroughly. \[[4][4]\]
  - That your organization places a high enough value on low-defects to
-   justify the resource sink [[4]][4]
+   justify the resource sink \[[4][4]\]
 
 ### Weaknesses
 
@@ -93,32 +93,32 @@ The requirements above may also be seen as weaknesses.
    – there is no guarantee that all code paths are covered or that the tests
    consider all the cases that have been covered in the code.
  - Seeing hundreds or thousands of passing tests can create a sense of false
-   security. [[4]][4]
+   security. \[[4][4]\]
  - Even trivially changing or heavily refactoring the functional code can
-   involve rewriting hundreds or even thousands of tests. [[4]][4] [[5]][5]
+   involve rewriting hundreds or even thousands of tests. \[[4][4], [5][5]\]
  - Requires a huge investment in time to *get into it*, thus it also
    requires a lot of discipline. This can be hard to sell to other
-   developers. [[5]][5]
+   developers. \[[5][5]\]
  - Selling the full TDD package to management can be very hard. For example,
    TDD is best done with pair programming, which many managers cannot
-   accept. [[5]][5]
+   accept. \[[5][5]\]
  - You lose a lot of (possibly negative) freedom, because TDD is very rigid
    and specifies much of the software development process. This might be
-   an advantage, but some certainly won't like it. [[5]][5]
+   an advantage, but some certainly won't like it. \[[5][5]\]
  - Applying TDD *does* require an extra time and resources investment. This
    may be worth it, depending on what you are doing, but it still is a big
-   investment. [[5]][5]
+   investment. \[[5][5]\]
  - TDD can lock the functional code into a certain design as long as tests
    assume a certain API. If the API is not yet certain or clear, or
-   prototyping must be done, then TFD will generate extra work. [[5]][5]
+   prototyping must be done, then TFD will generate extra work. \[[5][5]\]
  - TDD makes tweaking and tuning (like algorithms) much more expensive.
-   [[5]][5]
+   \[[5][5]\]
  - The entire set of tests must be maintained and debugged. While the tests
    only help make sure the functional code is good, you still are completely
    responsible for the quality of the tests. Many people do not know how to
-   properly create tests. [[5]][5]
+   properly create tests. \[[5][5]\]
  - The requirement of testable code results in a much more complex design
-   than might be necessary for the problem at hand. [[5]][5]
+   than might be necessary for the problem at hand. \[[5][5]\]
 
 Ben's Thoughts
 --------------
