@@ -48,65 +48,150 @@
 \tableofcontents
 
 \begin{abstract}
- Diese Ausarbeitung wurde im Rahmen der Vorlesung "`Management im Software Engineering"' an der Universität Würzburg im Wintersemester 2013/2014 bei Dr. Jürgen Schmied geschrieben. Im Folgenden wird ein kurzer Überblick über das Entwicklungsparadigma "`Testgetriebene Entwicklung"' gegeben und anhand eines Beispieles die wichtigsten Faktor aufgezeigt. Anschließend werden Vor- und Nachteile aufgezeigt und ein Fazit gezogen. Abschließend steht noch ein persönlicher Erfahrungsbericht der beiden Autoren dieser Arbeit.
+ Diese Ausarbeitung wurde im Rahmen der Vorlesung "`Management im Software
+ Engineering"' an der Universität Würzburg im Wintersemester 2013/2014 bei Dr.
+ Jürgen Schmied geschrieben. Im Folgenden wird ein kurzer Überblick über das
+ Entwicklungsparadigma "`Testgetriebene Entwicklung"' gegeben und anhand eines
+ Beispieles die wichtigsten Faktor aufgezeigt. Anschließend werden Vor- und
+ Nachteile aufgezeigt und ein Fazit gezogen. Abschließend steht noch ein
+ persönlicher Erfahrungsbericht der beiden Autoren dieser Arbeit.
 \end{abstract}
 
 \chapter{Einführung}
 \pje
-Bei den klassischen Entwicklungsmodellen werden Tests erst nach Fertigstellung einzelner Module ausgeführt, dies führt dazu, dass unter Umstände vielen Nacharbeiten nötig sind bevor mit dem nächsten Modul angefangen werden kann. Auch ist es bei diesem Vorgehen möglich, dass Funktionen vergessen werden zu implementieren. Dieses Problem ist gerade heutzutage immer schwer wiegender, da die Software immer komplexer wird und somit die Pflichtenhefte immer länger werden. Im Zusammenspiel mit Zeitdruck im Projekt führt dies dazu, dass manches überlesen werden kann. Eine weitere Problematik die bei klassischen Methoden auftreten kann, ist dass Tests vernachlässigt werden, sollte es am Projektende eng werden oder der Kostenrahmen gesprengt werden.
+Bei den klassischen Entwicklungsmodellen werden Tests erst nach Fertigstellung
+einzelner Module ausgeführt, dies führt dazu, dass unter Umstände vielen
+Nacharbeiten nötig sind bevor mit dem nächsten Modul angefangen werden kann.
+Auch ist es bei diesem Vorgehen möglich, dass Funktionen vergessen werden zu
+implementieren. Dieses Problem ist gerade heutzutage immer schwer wiegender, da
+die Software immer komplexer wird und somit die Pflichtenhefte immer länger
+werden. Im Zusammenspiel mit Zeitdruck im Projekt führt dies dazu, dass manches
+überlesen werden kann. Eine weitere Problematik die bei klassischen Methoden
+auftreten kann, ist dass Tests vernachlässigt werden, sollte es am Projektende
+eng werden oder der Kostenrahmen gesprengt werden.
 
-Diese Probleme versucht die agile Softwareentwicklungs-Methode \gls{xp} mit häufigen Testen und Pair Programming zu umgehen. Mittlerweile hat sich der Aspekt des häufigen Testens zu einem eigenen Paradigma entwickelt und findet in vielen Bereichen Anwendung in den hohe Codequalität gefordert wird. Bei \gls{tdd} steht das regelmäßige Testens seines Codes bereits in während der Implementierung im Mittelpunkt. Da dazu die Test bereits vor dem \gls{prodCode} geschrieben werden, wird auch teilweise bereits auf Vollständigkeit geprüft. Im folgenden Kapitel wird auf die genaue Definition von Testgetriebener Entwicklung genauer eingegangen.
+Diese Probleme versucht die agile Softwareentwicklungs-Methode \gls{xp} mit
+häufigen Testen und Pair Programming zu umgehen. Mittlerweile hat sich der
+Aspekt des häufigen Testens zu einem eigenen Paradigma entwickelt und findet in
+vielen Bereichen Anwendung in den hohe Codequalität gefordert wird. Bei
+\gls{tdd} steht das regelmäßige Testens seines Codes bereits in während der
+Implementierung im Mittelpunkt. Da dazu die Test bereits vor dem \gls{prodCode}
+geschrieben werden, wird auch teilweise bereits auf Vollständigkeit geprüft. Im
+folgenden Kapitel wird auf die genaue Definition von Testgetriebener
+Entwicklung genauer eingegangen.
 
 \chapter{Definition}
 \bmn
+
 \chapter{Umsetzung}
 \pje
-Die Umsetzung der \gls{tdd} erfolgt in mehren Stufen und findet auf unterschiedlichen Integrationsebenen statt. Je nach Ebene werden unterschiedliche Praktiken und Tools angewendet, auf die im Folgenden näher eingegangen wird.
+Die Umsetzung der \gls{tdd} erfolgt in mehren Stufen und findet auf
+unterschiedlichen Integrationsebenen statt. Je nach Ebene werden
+unterschiedliche Praktiken und Tools angewendet, auf die im Folgenden näher
+eingegangen wird.
 
 \section{Unit-Tests}
-Die bekannteste Testtechnik in der Softwareentwicklung sind wahrscheinlich die \textsc{Unit}- bzw. Modultests. Diese werden häufig mit Hilfe von in die Entwicklungssprache und die \gls{ide} integrierte Testframeworks durchgeführt. Einer der bekanntesten und ersten Repräsentanten dieser Testframeworks ist jUnit. Mittlerweile gibt es viele Ports auf andere Sprachen und Platformen, zum Beispiel nUnit für das .NET-Framwork von Microsoft oder cUnit für C und C++, das nicht nur auf x86- und x64-Platformen portiert wurde, sondern unter anderem auch auf MIPS und MSP430.
+Die bekannteste Testtechnik in der Softwareentwicklung sind wahrscheinlich die
+\textsc{Unit}- bzw. Modultests. Diese werden häufig mit Hilfe von in die
+Entwicklungssprache und die \gls{ide} integrierte Testframeworks durchgeführt.
+Einer der bekanntesten und ersten Repräsentanten dieser Testframeworks ist
+jUnit. Mittlerweile gibt es viele Ports auf andere Sprachen und Platformen, zum
+Beispiel nUnit für das .NET-Framwork von Microsoft oder cUnit für C und C++,
+das nicht nur auf x86- und x64-Platformen portiert wurde, sondern unter anderem
+auch auf MIPS und MSP430.
 
-Diese Test finden auf der untersten Ebene statt und sichern die Software gegen Implementierungsfehler von Teilaufgaben ab, so werde einzelne Funktionen auf die korrekte Ausgabe bei einer genau definierten Eingabe getestet. Auf dieser Integrationsebene werden alle Objekte, die mit dem zu testenden Objekt interagieren durch so genannte Mock-Objekte abstrahiert.
+Diese Test finden auf der untersten Ebene statt und sichern die Software gegen
+Implementierungsfehler von Teilaufgaben ab, so werde einzelne Funktionen auf
+die korrekte Ausgabe bei einer genau definierten Eingabe getestet. Auf dieser
+Integrationsebene werden alle Objekte, die mit dem zu testenden Objekt
+interagieren durch so genannte Mock-Objekte abstrahiert.
 
-Ein Mock-Objekt bietet die gleiche Schnittstellen wie das zu simulierende Objekt, allerdings sind die Ausgaben fest definiert, um ein deterministischen Verhalten ohne Interferenzen mit unter Umständen externen Quellen zu vermeiden. Zum Beispiel wird bei datenverarbeitenden Programmen der Datenbankzugriff auf ein Mock-Objekt zum Testen abgebildet, da dadurch sich die Eingabe genau definieren lässt.
+Ein Mock-Objekt bietet die gleiche Schnittstellen wie das zu simulierende
+Objekt, allerdings sind die Ausgaben fest definiert, um ein deterministischen
+Verhalten ohne Interferenzen mit unter Umständen externen Quellen zu vermeiden.
+Zum Beispiel wird bei datenverarbeitenden Programmen der Datenbankzugriff auf
+ein Mock-Objekt zum Testen abgebildet, da dadurch sich die Eingabe genau
+definieren lässt.
 
-Die Unit-Tests werden bei Anwendung des Paradigmas der \gls{tdd} bei jeder kleinsten Änderung ausgeführt und die Entwicklung wird erst durchgeführt, sobald der entsprechende Test fehlerfrei durchläuft.
+Die Unit-Tests werden bei Anwendung des Paradigmas der \gls{tdd} bei jeder
+kleinsten Änderung ausgeführt und die Entwicklung wird erst durchgeführt,
+sobald der entsprechende Test fehlerfrei durchläuft.
 
 \section{Integrationtests}
-Bei den Integrationstests, die häufig auch noch mit den Testframeworks durchgeführt werden, werden in einzelnen Iterationen die Mock-Objekte durch ihr reales Pendant ersetzt und dadurch kontrolliert, dass die Zusammenarbeit der Komponenten untereinander fehlerfrei funktioniert.
+Bei den Integrationstests, die häufig auch noch mit den Testframeworks
+durchgeführt werden, werden in einzelnen Iterationen die Mock-Objekte durch ihr
+reales Pendant ersetzt und dadurch kontrolliert, dass die Zusammenarbeit der
+Komponenten untereinander fehlerfrei funktioniert.
 
-Die Integrationstests werden bei der \gls{tdd} ab der ersten Iteration ständig durchgeführt ab der eine Integration möglich ist. Beim Beispiel der datenverarbeitenden Anwendung, wird neben den Modultests, die z.B. die Berechnung eines Indexes usw. beinhalten, ab der vollständigen Implementierung des Datenbankzugriffes neben dem Mock-Objekt-Test auch direkt der Datenbankzugriff getestet, um frühzeitig Probleme bzw. Fehler zu erkennen und diese in einem frühen Stadium beheben zu können.
+Die Integrationstests werden bei der \gls{tdd} ab der ersten Iteration ständig
+durchgeführt ab der eine Integration möglich ist. Beim Beispiel der
+datenverarbeitenden Anwendung, wird neben den Modultests, die z.B. die
+Berechnung eines Indexes usw. beinhalten, ab der vollständigen Implementierung
+des Datenbankzugriffes neben dem Mock-Objekt-Test auch direkt der
+Datenbankzugriff getestet, um frühzeitig Probleme bzw. Fehler zu erkennen und
+diese in einem frühen Stadium beheben zu können.
 
 \section{Systemtest}
-Sind alle Teile einer Anwendung erfolreich mit Modultests und Integrationstests getestet, kann die letzte Iteration der Integrationstests durchgeführt werden. Diese wird auch häufig als Systemtest bezeichnet und ist der erste Test, bei dem alle Komponenten zusammenspielen und ihr Verhalten miteinander getestet wird.
+Sind alle Teile einer Anwendung erfolreich mit Modultests und Integrationstests
+getestet, kann die letzte Iteration der Integrationstests durchgeführt werden.
+Diese wird auch häufig als Systemtest bezeichnet und ist der erste Test, bei
+dem alle Komponenten zusammenspielen und ihr Verhalten miteinander getestet
+wird.
 
-Ab der ersten vollständigen Integration aller Komponenten wird bei der jeder Iteration des Refactor/Debug-Zyklus neben Unit-Tests und den Integrationstests ausgeführt auch bei diesem Test gilt, die Entwicklung wird erst fortgesetzt, wenn alle Tests erneut erfolreich bestanden sind.
+Ab der ersten vollständigen Integration aller Komponenten wird bei der jeder
+Iteration des Refactor/Debug-Zyklus neben Unit-Tests und den Integrationstests
+ausgeführt auch bei diesem Test gilt, die Entwicklung wird erst fortgesetzt,
+wenn alle Tests erneut erfolreich bestanden sind.
 
 \chapter{Vorraussetzungen}
 \bmn
+
 \chapter{Beispiel}
 \pje
+
 \chapter{Vorteile}
 \bmn
+
 \chapter{Nachteile}
 \bmn
+
 \chapter{Fazit}
 \pje
+
 \chapter{Erfahrungsbericht}
-Nach dem objektiven Fazit im vorigen Kapitel, werden hier noch die Erfahrungen der beiden Autoren zusammengefasst und ein persönliches Fazit gezogen.
+Nach dem objektiven Fazit im vorigen Kapitel, werden hier noch die Erfahrungen
+der beiden Autoren zusammengefasst und ein persönliches Fazit gezogen.
+
 \section{Benjamin Morgan}
 \bmn
+
 \section{Philipp Jeske}
 \pje
-Ich habe bereits in kleineren Projekten als auch in mittelgroßen Projekten, versucht \gls{tdd} einzusetzen, jedoch gab es einige Probleme. 
+Ich habe bereits in kleineren Projekten als auch in mittelgroßen Projekten,
+versucht \gls{tdd} einzusetzen, jedoch gab es einige Probleme. 
 
-So stelle sich heraus, dass der Aufwand bereits bei kleinen Projekten ziemlich groß ist, wenn man den ganzen Netzwerkstack mocken muss bzw. den Zugriff auf eine Datenbank. Ebenso stellte sich heraus, dass es eine Menge Mehraufwand erzeugt, wenn sich Anforderungen ändern, da diese dann auch in den Tests nachgezogen werden müssen.
+So stelle sich heraus, dass der Aufwand bereits bei kleinen Projekten ziemlich
+groß ist, wenn man den ganzen Netzwerkstack mocken muss bzw. den Zugriff auf
+eine Datenbank. Ebenso stellte sich heraus, dass es eine Menge Mehraufwand
+erzeugt, wenn sich Anforderungen ändern, da diese dann auch in den Tests
+nachgezogen werden müssen.
 
-Aber es gab nicht nur negative Beispiele, so eignet sich \gls{tdd} meines Erachtens um logische Fehler bereits während der Implementierung zu erkennen. Auch zum Testen von projektinternen Abhängigkeiten der Art "`Klasse A erbt von Klasse C und implementiert Schnittstelle C"' können mit Hilfe von \gls{tdd} sehr gut getestet werden.
+Aber es gab nicht nur negative Beispiele, so eignet sich \gls{tdd} meines
+Erachtens um logische Fehler bereits während der Implementierung zu erkennen.
+Auch zum Testen von projektinternen Abhängigkeiten der Art "`Klasse A erbt von
+Klasse C und implementiert Schnittstelle C"' können mit Hilfe von \gls{tdd}
+sehr gut getestet werden.
 
-Aufgrund meiner persönlichen Erfahrungen würde ich weder zu \gls{tdd} raten noch davon ab. Ich würde einen abgespeckten Workflow vorziehen, der den Testaufwand auf logische Fehler reduziert, die einfach überprüft werden können und die Integrationstests nur auf einfache Fälle wie oben beschrieben beschränkt. Für die restlichen Testpunkte bevorzuge ich den klassischen Ansatz, da sich der Aufwand dadurch reduziert.
+Aufgrund meiner persönlichen Erfahrungen würde ich weder zu \gls{tdd} raten
+noch davon ab. Ich würde einen abgespeckten Workflow vorziehen, der den
+Testaufwand auf logische Fehler reduziert, die einfach überprüft werden können
+und die Integrationstests nur auf einfache Fälle wie oben beschrieben
+beschränkt. Für die restlichen Testpunkte bevorzuge ich den klassischen Ansatz,
+da sich der Aufwand dadurch reduziert.
 
-Ferner macht es Sinn, die Tests von spezialisierten Teams schreiben zu lassen, da dadurch das Problem der Whitebox-Tests weiter umgangen wird und nicht jeder Entwickler tests schreiben will. Ferner spart es Schulungsaufwand.
+Ferner macht es Sinn, die Tests von spezialisierten Teams schreiben zu lassen,
+da dadurch das Problem der Whitebox-Tests weiter umgangen wird und nicht jeder
+Entwickler tests schreiben will. Ferner spart es Schulungsaufwand.
 
 \bibliographystyle{natdin}
 \bibliography{literatur}
