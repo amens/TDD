@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+    <style>
+        .reveal .slides li {
+            padding-top: 0.5em;
+        }
+
+        .reveal .slides ol, .reveal .slides ul {
+            padding-bottom: 0.75em;
+        }
+    </style>
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
         document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -56,7 +65,28 @@
 
 <!-- Definition: Ben -->
     <section id=definition>
-        <h2>Definition</h2>
+        <h2>Test-Driven Development</h2>
+
+        <p>Testgetriebene Entwickelung (TDD) ist ein Teil der <em>Agile</em>
+        Softwareentwickelung, bestehend aus:</p>
+
+        <ul style="margin-top: 0.5em">
+            <li><em>test-first development</em> (TFD), und
+            <li>häufiges Refaktorisieren.
+        </ul>
+    </section>
+
+    <section id=zyklus>
+        <h2>Kurzer iterativer Zyklus</h2>
+
+        <ol>
+            <li>Schreibe einen Test, der erstmal fehlschlägt.
+            <li>Implementiere gerade so viel Produktivcode,
+                dass der Test erfolgreich durchläuft.
+            <li>Refaktorisiere den Test- und Produktivcode.
+        </ol>
+
+        <p style="font-size: 90%">Der ganze Zyklus soll etwa 3–15 Minuten dauern.</p>
     </section>
 
     <section>
@@ -79,7 +109,6 @@
 
             <aside class=notes>
                 Der Entwickler reagiert nur auf fehlschlagende Tests.
-
             </aside>
         </section>
 
@@ -100,11 +129,20 @@
         </section>
     </section>
 
-    <section id=nebeneffekte>
-        <h2>Nebeneffekte</h2>
+    <section id=bemerkungen>
+        <h2>Bemerkungen zu TDD</h2>
 
         <ul>
             <li>
+                Es entstehen viele kleine Kontextwechsel zwischen
+                Produktivcode und Testcode schreiben.
+            <li>
+                Die Konfigurationsmanagement sowie Entwicklungsumgebung
+                spielen bei TDD eine große Rolle.
+            <li>
+                Ein signifikanter Nebeneffekt ist die Menge der erzeugten
+                Tests, der in der Regel mindestens so groß wie der
+                Produktivcode ist.
         </ul>
     </section>
 
@@ -129,12 +167,9 @@
             <h2>Vorraussetzungen</h2>
 
             <ul>
-                <li class=fragment>
-                    Das Management und Entwicklungsteam akzeptiert TDD.
-                <li class=fragment>
-                    Der Produktivcode ist testbar auf Basis von Unittests.
-                <li class=fragment>
-                    Die Spezifikation wird sich nicht signifikant ändern.
+                <li>Das Management und Entwicklungsteam akzeptiert TDD.
+                <li>Der Produktivcode ist testbar auf Basis von Unittests.
+                <li>Die Spezifikation wird sich nicht signifikant ändern.
                     Es wird nicht zu heftig refaktoriert/überarbeitet.
             </ul>
         </section>
@@ -143,13 +178,10 @@
             <h3>Strikte Vorraussetzungen</h3>
 
             <ul>
-                <li class=fragment>
-                    Der Entwicklungsgegenstand hat einen klaren Ansatz
+                <li>Der Entwicklungsgegenstand hat einen klaren Ansatz
                     und erfordert wenig Experimentieren oder Prototyping.
-                <li class=fragment>
-                    Man kann den Entwicklungsgegenstand logisch in Module zerteilen.
-                <li class=fragment>
-                    Es ist möglich, überall Dependency Injection anzuwenden
+                <li>Man kann den Entwicklungsgegenstand logisch in Module zerteilen.
+                <li>Es ist möglich, überall Dependency Injection anzuwenden
                     oder Objekte durch Mockobjekte zu ersetzen.
             </ul>
         </section>
@@ -162,15 +194,67 @@
         </section>
     </section>
 
-    <section id=vorteile>
-        <section>
-            <h3>Vorteile</h3>
+    <section>
+        <section id=vorteile1>
+            <h2>Vorteile [1/2]</h2>
+
+            <ul>
+                <li>TDD erzwingt ein testbares Design.
+                <li>Hunderte und Tausende von Tests werden erzeugt.
+                <li>Die Tests spezifizieren die Funktionalität eindeutig.
+                <li>Die Tests dienen als Dokumentation und Beispielanwendungen.
+            </ul>
+        </section>
+
+        <section id=vorteile2>
+            <h2>Vorteile [2/2]</h2>
+
+            <ul>
+                <li>Man kann nach Belieben refaktorisieren, ohne versehentlich
+                    Regressionen einzuführen.
+                <li>Es gibt keinen Grund, „Angst“ vor dem Anfassen, Ändern oder
+                    Löschen des Codes zu haben.
+            </ul>
+        </section>
+
+        <section id=prophylaxe>
+            <h3>TDD Als Prophylaxe</h3>
+            <p>TDD beugt effektiv vor der menschliche Natur, genauer vor:</p>
+
+            <ul>
+                <li>Ausreden oder Abkürzungen um das Testen,
+                <li>Gezwungenes Überspringen von Testphasen durch Management.
+            </ul>
         </section>
     </section>
 
-    <section id=nachteile>
-        <section>
-            <h3>Nachteile</h3>
+    <section>
+        <section id=nachteilige_vorraussetzungen>
+            <h2>Vorraussetzungen als Nachteile</h2>
+
+            <p>Der Zusatzaufwand von TDD ist nicht Umsonst: TDD erfordert
+            mehr Disziplin und Zeit von Entwicklern und muss gelernt werden.</p>
+
+            <ul>
+                <li>Manche Softwaregegenstände passen nicht leicht in TDD rein.
+                <li>Änderungen an der Spezifikation sind teuer.
+                <li>Die Management lässt sich oft nicht überzeugen, ganz in TDD
+                    zu investieren.
+                <li>Die Tests müssen über die gesamte Entwickelungsdauer
+                    erhalten werden.
+            </ul>
+        </section>
+
+        <section id=nachteile1>
+            <h2>Andere Nachteile</h2>
+
+            <ul>
+                <li>TDD führt oft zu ein komplexeres Design.
+                <li>Die Menge an erfolgreich durchlaufende Tests kann falsche
+                    Sicherheit herbeiführen; die Tests können Lücken aufweisen.
+                <li>TDD kann den Produktivcode schnell in ein vorläufiges Design
+                    fixieren.
+            </ul>
         </section>
     </section>
 
