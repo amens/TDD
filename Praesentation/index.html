@@ -57,10 +57,14 @@
 <!-- Einführung: Philipp -->
     <section id=problem>
         <h2>Das Problem</h2>
+        
+        <p>Aufgrund später Tests, unabsehbarer Nachbesserungsaufwand bei komplexen Projekten.</p>
     </section>
 
     <section id=loesung>
         <h2>Die Lösung</h2>
+        
+        <p>Früh in der Entwicklung Testen, am besten zeitgleich => TDD</p>
     </section>
 
 <!-- Definition: Ben -->
@@ -149,11 +153,11 @@
 <!-- Umsetzung: Philipp -->
     <section id=umsetzung>
         <h2>Umsetzung</h2>
-    </section>
-
-<!-- Beispiel: Philipp -->
-    <section id=beispiel>
-        <h2>Beispiel</h2>
+        
+        <p>
+            Die Umsetzung erfolgt in der Praxis häufig mit Unit-Tests, 
+            mit unterschiedlich starker Mock-Repräsentation
+        </p>
     </section>
 
 <!-- Bewertung: Ben -->
@@ -261,8 +265,33 @@
 <!-- Fazit: Philipp -->
     <section id=fazit>
         <h2>Fazit</h2>
+        
+        <p>Keine allgemeine Empfehlung möglich, immer eine Einzelfallentscheidung</p>
     </section>
 
+<!-- Beispiel: Philipp -->
+    <section>
+        <section id=beispiele>
+            In folgenden Beispielen TDD einsetzen oder nicht?
+        </section>
+        <section id=beispiel1>
+            <h2>Beispiel 1</h2>
+            <p>Es soll eine neue Version eines Autopiloten entwickelt werden. Der Autopilot 
+            legt anhand von Zielwerten und Messwerten, wie Windgeschwindigkeit, -richtung, Luftdruck,
+            GPS etc., die Winkel der Steuerflächen und die Leistung der Turbinen fest. Das 
+            Management fordert eine hohe Qualität und überprüfbare Korrektheit, damit eine 
+            Zulassung für den Luftverkehr erfolgen kann.  </p>
+        </section>
+        <section id=beispiel2>
+            <h2>Beispiel 2</h2>
+            <p>Es soll eine Applikation entwickelt werden, die über das Netzwerk auf eine
+            Datenbank zugreift und für eine GUI für die CRUD-Operationen bereitstellt. Der
+            Kunde möchte damit ein existierendes System ablösen und seinen Workflow verbessern. Es
+            soll auf einem für das Unternehmen neuen Framework aufbauen und Teilberechnungen sollen
+            über eine proprietäre Drittsoftware umgesetzt werden. Um die Akzeptanz der Anwender zu
+            steigern, werden diese regelmäßige nach Verbesserungsvorschlägen befragt.</p>
+        </section>
+    </section>
 <!-- Ende -->
     <section>
         <section id=danke>
