@@ -1,0 +1,525 @@
+\documentclass{mitschrift}
+
+% Includes
+\usepackage{biblatex}
+\bibliography{literatur.bib}
+
+\usepackage[toc]{glossaries}
+
+\usepackage{url}
+\makeatletter
+\def\url@leostyle{\@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=grey,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=black
+}
+
+% Newcommands
+\newcommand{\pje}{\marginpar{Philipp\\Jeske}}
+\newcommand{\bmn}{\marginpar{Benjamin\\Morgan}}
+
+\makeglossaries
+
+%opening
+\titlehead{Management im Software Engineering \\ Universität Würzburg \\ WS 2013/2014}
+\title{Test-Driven Development}
+\subject{Ausarbeitung}
+\author{Philipp Jeske \and Benjamin Morgan}
+\date{\today}
+
+% Glossar
+\newglossaryentry{xtremeProgramming}{
+  name={Extreme Programming},
+  description={Agiles Softwareentwicklungsparadigma}
+}
+\newacronym{xp}{XP}{\gls{xtremeProgramming}}
+
+\newglossaryentry{prodCode}{
+  name={Production Code},
+  description={Quelltext, der in das finale Produkt eingebaut wird}
+}
+
+\newglossaryentry{ideLang}{
+  name={Integrated Development Environment},
+  description={Bezeichnet einen speziell für die Softwareentwicklung gebauten
+  Texteditor, der häufig auf eine Sprache spezialisiert ist und für diese
+  bereits Compiler und Debugger mitliefert.}
+}
+\newacronym{ide}{IDE}{\gls{ideLang}}
+
+\newglossaryentry{tesDrDev}{
+  name={Testgetriebene Entwicklung},
+  description={häufig auch testdriven development}
+}
+\newacronym{tdd}{TDD}{\gls{tesDrDev}}
+
+\newglossaryentry{exdd}{
+  name = {Beispielgesteuerte Entwicklung},
+  description = {häufig auch: example driven development, alternative Form der \gls{tesDrDev}}
+}
+\newacronym{edd}{EDD}{\gls{exdd}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\begin{abstract}
+ Diese Ausarbeitung wurde im Rahmen der Vorlesung "`Management im Software
+ Engineering"' an der Universität Würzburg im Wintersemester 2013/2014 bei Dr.
+ Jürgen Schmied geschrieben. Im Folgenden wird ein kurzer Überblick über das
+ Entwicklungsparadigma "`Testgetriebene Entwicklung"' gegeben und anhand eines
+ Beispieles die wichtigsten Faktor aufgezeigt. Anschließend werden Vor- und
+ Nachteile aufgezeigt und ein Fazit gezogen. Abschließend findet sich noch ein
+ persönlicher Erfahrungsbericht der beiden Autoren dieser Arbeit.
+\end{abstract}
+
+\chapter{Einführung}\label{Einfuehrung}\pje
+Bei den klassischen Entwicklungsmodellen werden Tests erst nach Fertigstellung
+einzelner Module ausgeführt, dies führt dazu, dass unter Umstände viele
+Nacharbeiten nötig sind bevor mit dem nächsten Modul angefangen werden kann.
+Auch ist es bei diesem Vorgehen möglich, dass Funktionen vergessen werden zu
+implementieren. Dieses Problem ist gerade heutzutage immer schwerwiegender, da
+die Software immer komplexer wird und somit die Pflichtenhefte immer länger
+werden. Im Zusammenspiel mit Zeitdruck im Projekt führt dies dazu, dass manches
+überlesen wird. Eine weitere Problematik die bei klassischen Methoden
+auftreten kann, ist dass Tests vernachlässigt werden, sollte es am Projektende
+eng werden oder der Kostenrahmen gesprengt werden.
+
+Diese Probleme versucht die agile Softwareentwicklungs-Methode \gls{xp} mit
+häufigen Tests und \emph{Pair Programming} zu umgehen. Mittlerweile hat sich der
+Aspekt des häufigen Testens zu einem eigenen Paradigma entwickelt und findet in
+vielen Bereichen Anwendung in denen hohe Codequalität gefordert wird. Bei
+\gls{tdd} steht das regelmäßige Testen des Codes bereits während der
+Implementierung im Mittelpunkt. Da dazu die Test bereits vor dem \gls{prodCode}
+geschrieben werden, wird auch teilweise bereits auf Vollständigkeit geprüft. Im
+folgenden Kapitel wird auf die genaue Definition von Testgetriebener
+Entwicklung genauer eingegangen.
+
+\chapter{Definition}\label{Definition}\bmn
+Testgetriebene Entwickelung (engl.\ \emph{test-driven development}, auch TDD)
+ist ein Teil der agile Softwareentwickelung, bestehend aus \emph{test-first
+development} (TFD) und Refaktorisierung. Die Tests werden zuerst geschrieben und
+steuern die gesamte Softwareentwickelung. \cite{AgileData, itAgile}
+
+Diese Kombination stellt den traditionellen Softwareentwicklungsprozess oft auf
+den Kopf, wo Code der funktioniert nicht mehr angefasst wird (da etwas kaputt
+gehen könnte) und Testing in der Regel zuletzt gemacht wird oder teilweise
+weggelassen wird.
+
+TDD besteht aus einem kurzen iterativen Zyklus:
+
+\begin{itemize}
+    \item Schreibe einen Test, der erstmal fehlschlägt.
+    \item Implementiere gerade so viel Produktivcode, dass der Test erfolgreich
+        durchläuft wird.
+    \item Refaktorisiere den Test- und Produktivcode. \cite{itAgile}
+\end{itemize}
+
+Die ersten zwei Schritte machen \emph{test-first development} (TFD) aus, und
+der dritte Schritt ist das Refaktorieren.  Man kann das TFD-Paradigma auch
+zusammenfassen als eine Reihe von Gesetzen die der Entwickeler befolgen muss,
+Diese Sicht hat den Vorteil, sehr präzise und prägnant zu sein.
+Die folgenden Punkte bilden eine Sammlung solcher Gesetze.
+
+\begin{enumerate}
+    \item You are not allowed to write any production code unless it is to make
+        a failing unit test pass.
+    \item You are not allowed to write any more of a unit test than is
+        sufficient to fail; and compilation failures are failures.
+    \item You are not allowed to write any more production code than is
+        sufficient to pass the one failing unit test. \cite{UncleBob}
+\end{enumerate}
+
+Die Voraussetzung ist natürlich, dass man Produktivcode schreibt, der von
+Unit-Tests getestet werden kann. In einem gewissen Sinne reagiert der
+Entwickler nur auf fehlschlagende Tests. Allerdings fehlt hier das kritische
+Refaktorisieren.
+
+Aus diesen drei Gesetzen folgt, dass man nicht sehr viel Zeit nur mit den Tests
+oder nur mit dem Produktivcode verbringen kann. Man wechselt häufig zwischen
+Tests schreiben und Produktivcode schreiben ab, sogar alle paar Minuten
+\cite{itAgile, UncleBob}. Das System kompiliert dabei ständig, um den
+Entwickler dabei zu unterstützen. Das Ergebnis ist, dass man fast immer
+Produktivcode hat der funktioniert, und wenn er nicht funktioniert, dann wird
+der Code der vor ein paar Minuten existiert hat funktionieren.
+
+Zu diesem Zweck gebraucht TDD Konfigurationsmanagement in großem Maß, sodass
+man beim Refaktorisieren leicht zu ältere Versionen vom Code zurückfallen kann,
+falls das Refaktorisieren komplett fehlschlägt.
+
+Die Entwicklungsumgebung muss diese Arbeitsweise also unterstützen, um TFD
+anwenden zu können; lange Kompilierzeiten, schlechte Testframeworks oder ein
+Konfigurationsmanagement das nicht schnell und unkompliziert in den Workflow
+integriert werden kann, können TDD sehr unprofitabel machen.
+
+Ein signifikanter Nebeneffekt von TDD oder TFD im Allgemeinen ist, dass man
+sehr viel Testcode generiert. In der Regel rechnet man mit mindestens so viel
+Testcode wie man Produktivcode hat. \cite{SQlite3, C2}
+
+\chapter{Umsetzung}\label{Umsetzung}\pje
+Die Umsetzung der \gls{tdd} erfolgt in mehren Stufen und findet auf
+unterschiedlichen Integrationsebenen statt. Je nach Ebene werden
+unterschiedliche Praktiken und Tools angewendet, auf die im Folgenden näher
+eingegangen wird.
+
+\section{Unit-Tests}
+Die bekannteste Testtechnik in der Softwareentwicklung sind wahrscheinlich die
+\textsc{Unit}- bzw. Modultests. Diese werden häufig mit Hilfe von in die
+Entwicklungssprache und die \gls{ide} integrierte Testframeworks durchgeführt.
+Einer der bekanntesten und ersten Repräsentanten dieser Testframeworks ist
+jUnit. Mittlerweile gibt es viele Ports auf andere Sprachen und Platformen, zum
+Beispiel nUnit für das .NET-Framwork von Microsoft oder cUnit für C und C++,
+das nicht nur auf x86- und x64-Platformen portiert wurde, sondern unter anderem
+auch auf MIPS und MSP430.
+
+Diese Test finden auf der untersten Ebene statt und sichern die Software gegen
+Implementierungsfehler von Teilaufgaben ab, so werde einzelne Funktionen auf
+die korrekte Ausgabe bei einer genau definierten Eingabe getestet. Auf dieser
+Integrationsebene werden alle Objekte, die mit dem zu testenden Objekt
+interagieren durch so genannte Mock-Objekte abstrahiert.
+
+Ein Mock-Objekt bietet die gleiche Schnittstellen wie das zu simulierende
+Objekt, allerdings sind die Ausgaben fest definiert, um ein deterministischen
+Verhalten ohne Interferenzen mit unter Umständen externen Quellen zu vermeiden.
+Zum Beispiel wird bei datenverarbeitenden Programmen der Datenbankzugriff auf
+ein Mock-Objekt zum Testen abgebildet, da dadurch sich die Eingabe genau
+definieren lässt.
+
+Die Unit-Tests werden bei Anwendung des Paradigmas der \gls{tdd} bei jeder
+kleinsten Änderung ausgeführt und die Entwicklung wird erst durchgeführt,
+sobald der entsprechende Test fehlerfrei durchläuft.
+
+\section{Integrationtests}
+Bei den Integrationstests, die häufig auch noch mit den Testframeworks
+durchgeführt werden, werden in einzelnen Iterationen die Mock-Objekte durch ihr
+reales Pendant ersetzt und dadurch kontrolliert, dass die Zusammenarbeit der
+Komponenten untereinander fehlerfrei funktioniert.
+
+Die Integrationstests werden bei der \gls{tdd} ab der ersten Iteration ständig
+durchgeführt ab der eine Integration möglich ist. Beim Beispiel der
+datenverarbeitenden Anwendung, wird neben den Modultests, die z.B. die
+Berechnung eines Indexes usw. beinhalten, ab der vollständigen Implementierung
+des Datenbankzugriffes neben dem Mock-Objekt-Test auch direkt der
+Datenbankzugriff getestet, um frühzeitig Probleme bzw. Fehler zu erkennen und
+diese in einem frühen Stadium beheben zu können.
+
+\section{Systemtest}
+Sind alle Teile einer Anwendung erfolreich mit Modultests und Integrationstests
+getestet, kann die letzte Iteration der Integrationstests durchgeführt werden.
+Diese wird auch häufig als Systemtest bezeichnet und ist der erste Test, bei
+dem alle Komponenten zusammenspielen und ihr Verhalten miteinander getestet
+wird.
+
+Ab der ersten vollständigen Integration aller Komponenten wird bei der jeder
+Iteration des Refactor/Debug-Zyklus neben Unit-Tests und den Integrationstests
+ausgeführt auch bei diesem Test gilt, die Entwicklung wird erst fortgesetzt,
+wenn alle Tests erneut erfolreich bestanden sind.
+
+%\chapter{Beispiel}\label{Beispiel}\pje
+
+\chapter{Bewertung}\label{cpt:Bewertung}\bmn
+Es ist nicht immer offensichtlich, was die Vor- und Nachteile von TDD sind. Manchmal
+kommt es drauf an, wie genau man TDD anwendet, ob eine Eigenschaft von TDD
+ein Nachteil oder ein Vorteil ist. Es gibt auch Vorraussetzungen, die erfüllt
+sein sollten, um TDD sinnvoll anzuwenden.
+
+\section{Vorraussetzungen}\label{sec:Vorraussetzungen}
+Bill Landers auf \emph{StackExchange} \cite{StackExchange} hat prägnant
+zusammengefasst, welche Voraussetzungen erfüllt werden müssen, dass man von TDD
+richtig profitieren kann:
+
+\begin{itemize}
+    \item Der Produktivcode ist testbar auf Basis von Unit-Tests und es macht auch
+        Sinn auf dieser Ebene zu testen.
+    \item Der Entwicklungsgegenstand hat einen klaren Ansatz (d.h. einen klaren
+        Weg dahin) und erfordert kein aufwendiges Experimentieren oder
+        Prototyping.
+    \item Es wird nicht zu viel refaktoriert/überarbeitet und die Spezifikation
+        wird nicht signifikant geändert; es sei denn es ist akzeptabel hunderte
+        bis tausende von Testfälle immer wieder neu zu schreiben.
+    \item Nichts ist geschlossen (engl.\ \emph{sealed}).
+    \item Man kann den Entwicklungsgegenstand logisch in Module zerteilen.
+    \item Es ist möglich, überall Dependency Injection anzuwenden oder die
+        Objekte durch Mockobjekte zu ersetzen.
+    \item Das Management und das Entwicklungsteam akzeptieren TDD und wenden es
+        konsistent an.
+    \item Der Auftraggeber legt genug Wert auf insignifikante\footnote{Eigentlich
+        sind fast keine Fehler insignifikant; hier geht es um Fehler die nicht
+        so gravierend sind, oder die nur sehr selten auftreten.} Fehlern um den
+        Zusatzaufwand zu rechtfertigen.
+\end{itemize}
+
+Auch wenn nicht alle Punkte zutreffen, ist es dennoch möglich eingeschränkt TDD
+anzuwenden, allerdings sollte man besonders Acht geben, dass man keine Teile
+des Codebases benachteiligt, weil sie nicht mittels dem TDD Paradigma
+entwickelt werden.
+
+\section{Vorteile}\label{sec:Vorteile}
+
+Für Softwareprojekte die mit TDD entwickelt werden, gibt es verschiedene
+Vorteile.
+
+\begin{itemize}
+    \item Hunderte und Tausende von Tests werden erzeugt, die jederzeit
+        durchgeführt werden können; und sie sollten immer erfolgreich
+        verlaufen.
+    \item Durch die umfassenden Tests, gibt es mehr Transparenz im
+        Produktivcode; die Tests spezifizieren die Funktionalitäten.
+    \item Die Menge an Tests dient als Dokumentation und Beispielanwendungen
+        zugleich, zusätzlich sind sie immer aktuell.
+    \item Die Tests bilden eindeutig die Spezifikation und zwingen den
+        Entwickler die Spezifikation gut zu durchdenken bevor er mit dem
+        programmieren anfängt.
+    \item Man kann nach Belieben refaktorisieren, ohne zu riskieren, dass man
+        aus Versehen eine Regression einführt, da die Tests eine Art
+        Sicherheitsnetz bilden.
+    \item Es gibt kein Grund, Angst zu haben, Code „anzufassen“, also zu ändern
+        oder löschen. Die Software wird wirklich \emph{soft}. \cite{UncleBob}
+    \item Man hat ein testbares Design und Codebase, weil TDD es erzwingt.
+    \item Es gibt keine Ausreden oder Abkürzungen mehr um das Testen; weder
+        kann der Entwickler faul sein noch das Management das Überspringen der
+        Tests erzwingen.
+\end{itemize}
+
+In der Tat ist TDD ein effektives Werkzeug gegen die menschliche Natur; wenn
+ein Softwareprodukt fertig ist, neigt man oft dazu, nicht mehr zu testen wenn
+alles im grünen Bereich zu sein \emph{scheint}. TDD beugt diesem vor.
+
+\section{Nachteile}\label{sec:Nachteile}
+
+Die Vorraussetzungen von TDD können auch als Nachteile gesehen werden.
+Obwohl TDD Vorteile bringt, ist der Zusatzaufwand nicht Umsonst. Nicht nur
+müssen Entwickler TDD gut beherrschen lernen, sondern die konsiste Anwendung
+erfordert auch mehr Disziplin und Zeit wie ohne TDD.
+
+\begin{itemize}
+    \item Gewisse Softwaregegenstände lassen sich weniger effektiv mit TDD
+        entwickeln als andere. So sind beispielsweise Projekte die sehr
+        User-Interface oder Netzwerk lastig sind, schwer zu testen.
+    \item Auch trivialle Änderungen an der Spezifikation können dazu führen,
+        dass man hunderte oder tausende von Tests neuschreiben muss. Sogar
+        ein signifikantes Refaktorisieren kann dazu führen, dass viele Tests
+        fehlschlagen, obwohl die Spezifikation eigentlich eingehalten wird.
+        \cite{StackExchange}
+    \item Das Management vom gesamten TDD Paket zu überzeugen kann sehr
+        schwer sein. Zum Beispiel eignet sich TDD am besten wenn man
+        Paarprogrammiert, welches aber viele Manager nicht akzeptieren (zwei
+        tun die Arbeit von einem, das ist uneffizient). \cite{StackOverflow}
+    \item TDD erfordert eine große Investition von Zeit und Aufwand um
+        überhaupt reinzukommen; viele Entwickler haben nicht die nötige Geduld,
+        und somit kann es schwierig sein, das gesamte Entwicklungsteam von TDD
+        zu überzeugen. \cite{StackOverflow}
+    \item Die gesamte Menge an Tests muss auch erhalten und debugged werden.
+        Obwohl die Tests die Qualität des Produktivcodes steigern, ist der
+        Entwickler selber für die Qualität der Tests komplett zuständig.
+    \item Das schreiben von guten, effektiven Tests wie TDD es fordert ist
+        eine Kunst in sich selbst; viele Entwickler können keine \emph{gute}
+        Tests schreiben. \cite{StackOverflow}
+    \item TDD macht es sehr teuer, den Code zu tunen; bei vielen Algorithmen
+        kann erst durch Experimentieren die Performance richtig gesteigert werden.
+        \cite{StackOverflow}
+    \item Bestehende Projekte auf die TDD Entwickelungsstrategie umzustellen
+        kann eine riesige Herausforderung sein; es gibt keine Garantie, dass
+        alle Codewege gedeckt sind oder dass die Tests wirklich die gesamte
+        Funktionalität abdecken.
+\end{itemize}
+
+Es sieht vielleicht nach viel aus was gegen TDD spricht, aber die meisten
+Nachteile sind Design bedingt und gelten nicht für alle Projekte. Für die
+Projekte die zu TDD passen, oder für Entwickler die darin sehr zuhause sind,
+kann TDD besser sein als alternative Entwicklungsstrategien. Nach Sun Tzu
+sollte man allerdings seine eigene Schwächen gut kennen, damit man effektiv
+dagegen wirken kann.
+
+\begin{itemize}
+    \item Dass erfolgreiche durchlaufen von hunderte und tausende von Tests
+        kann leicht ein falsches Gefühl von Sicherheit herbeiführen.
+        \cite{StackExchange}
+    \item Die Voraussetzung, dass Code (Unit-) testbar sein muss führt oft zu
+        einem viel komplexeren Design als für das Problem eigentlich nötig ist.
+        \cite{StackExchange}
+    \item TDD führt zu einem sehr Schnittstellenzentrierten Code, da dies sich
+        besser testen lässt. Dies mag oft eine gute Eigenschaft sein, für
+        kleine Projekte ist es aber vielleicht unnötig.
+    \item Es ist möglich zu detailliert oder zu genau zu testen, dies kann die
+        Entwickelung verlangsamen und sogar das Refaktorisieren verhindern.
+    \item TDD kann den Produktivcode schnell in ein vorläufiges Design fixieren,
+        da die Tests eine bestimmte API verlangen. Falls die API noch nicht
+        eindeutig ist, oder falls Prototyping nötig ist, wird TFD viel
+        Zusatzarbeit erzeugen. \cite{StackOverflow}
+    \item Wenn Entwickler selber die Tests für ihren eigenen Produktivcode
+        schreiben, dann können leicht die Tests die gleichen Lücken wie der
+        Produktivcode aufweisen.
+    \item Oft glaubt man, die Tests würden alle Codewege decken; das mag
+        anfänglich stimmen, kann durchaus aber gerade durch das Refaktorisieren
+        nicht mehr der Fall sein.
+\end{itemize}
+
+\chapter{Fazit}\label{Fazit}\pje
+Nachdem im vorigen Kapitel die Vorteile und Nachteile von \gls{tdd} aufgezeigt wurden,
+soll in diesem Kapitel versucht werden objektiv einzuordnen, wann und wo \gls{tdd} sinnvoll
+eingesetzt werden kann, bevor im folgenden Kapitel eine subjektive empirische 
+Bewertung von \gls{tdd} der beiden Autoren erfolgt.
+
+Betrachtet man zunächst die nackten Zahlen, so gibt es mehr Nachteile als 
+Vorteile und zusätzlich noch diverse Einschränkungen, welche in \autoref{sec:Vorraussetzungen}
+geschildert sind. Untersucht man jedoch die Vorteile und Nachteile genauer
+kann unter gewissen Umständen ein Vorteil zu einem Nachteil werden und
+umgekehrt bzw. lassen sich die Nachteile vernachlässigen, weil die Vorteile
+einen hinreichend großen Vorteil bringen. Dies bedeutet, dass man allgemein 
+weder zu \gls{tdd} raten kann noch davon abraten. Dem Einsatz von \gls{tdd}
+sollte also immer eine Einzelfallprüfung vorausgehen, ob die Vorteile die
+Nachteile aufwiegen.
+
+Im Folgenden soll dies an einigen einfachen Beispielen illustriert werden.
+
+\begin{beispiel}
+  \textit{Es soll eine neue Version eines Autopiloten entwickelt werden. Der Autopilot 
+  legt anhand von Zielwerten und Messwerten, wie Windgeschwindigkeit, -richtung, Luftdruck,
+  GPS etc., die Winkel der Steuerflächen und die Leistung der Turbinen fest. Das 
+  Management fordert eine hohe Qualität und überprüfbare Korrektheit, damit eine 
+  Zulassung für den Luftverkehr erfolgen kann.}
+  
+  In diesem Szenario sind alle Vorraussetzungen mehr oder weniger erfüllt. Das
+  Management wird sich wahrscheinlich \gls{tdd} nicht verweigern, da eine
+  nachweisbare Korrektheit gefordert ist. Diese wird durch \gls{tdd} zu einem
+  hohen Prozentsatz erreicht. Der Weg ist zum Erreichen des Ziels ist klar, da
+  -- vereinfacht ausgedrückt -- lediglich einige Gleichungen korrekt implementiert 
+  werden müssen, die die Eingaben verarbeiten und die Ausgaben erzeugen. Die Umsetzung
+  lässt sich stark modularisieren, so lassen sich beispielsweise pro Sensor ein Modul
+  und pro Ausgabe ein Modul definieren.
+  
+  Die Vorteile die sich durch den Einsatz von \gls{tdd} in diesem Fall ergeben sind
+  \begin{itemize}
+    \item Fortwährende Überprüfung der Korrektheit
+    \item nachweisbare Korrektheit -- nur bei hinreichender Test-Coverage
+  \end{itemize}
+  
+  Diese beiden Vorteile überwiegen in diesem Fall den Nachteil des erhöhten Aufwands,
+  da Korrektheit in diesem Beispiel essentiell ist. Somit ist in diesem Fall der
+  Einsatz von \gls{tdd} zu empfehlen.
+\end{beispiel}
+
+\begin{beispiel}
+  \textit{Es soll eine Applikation entwickelt werden, die über das Netzwerk auf eine
+  Datenbank zugreift und für eine GUI für die CRUD-Operationen bereitstellt. Der
+  Kunde möchte damit ein existierendes System ablösen und seinen Workflow verbessern. Es
+  soll auf einem für das Unternehmen neuen Framework aufbauen und Teilberechnungen sollen
+  über eine proprietäre Drittsoftware umgesetzt werden. Um die Akzeptanz der Anwender zu
+  steigern, werden diese regelmäßige nach Verbesserungsvorschlägen befragt.}
+  
+  Dieses Beispiel ist so ziemlich der Super-GAU für den Einsatz von \gls{tdd}. Es gibt
+  kein fertige Spezifikation, da diese im Laufe der Entwicklung nach Anwenderwunsch
+  regelmäßig angepasst werden soll, eine proprietäre Blackbox soll neben einem Framework
+  eingesetzt werden, für das noch keine Erfahrungswerte im Unternehmen existieren. Ein
+  ebenso kritischer Punkt ist die Schwierigkeit beim Mocken der Kommunkation des 
+  Datenbankzugriffes, dies ist zwar möglich, erfordert jedoch immensen Mehraufwand.
+  Ferner ist es generell schwierig eine GUI analog zur Business Logic automatisiert zu
+  testen. Zusammengefasst bedeutet das, dass in diesem Fall von einem Einsatz von \gls{tdd}
+  abzuraten ist.
+\end{beispiel}
+
+So eindeutig wie in diesen beiden Extrembeispielen wird in der Praxis wahrscheinlich selten 
+die Entscheidung fallen. So kann ein gangbarer Weg manchmal sein, \gls{tdd} nur für einige
+Teilmodule einzusetzen. Allerdings bleibt das Problem der Testerstellung aus der Spezifikation
+bestehen. So kann aus einer ungenügenden Spezifikation niemals ein guter Testpool entstehen. Als
+Alternative zum klassischen Ansatz, exisitert das so genannte ,
+dass sich lediglich in der Erstellung der Tests vom gängigen \gls{tdd} unterscheidet. So werden
+bei der \gls{edd} die Testfälle nicht anhand der formalen Spezifikation, sondern
+anhand gemeinsam mit dem Kunden erarbeiteten Beispielen erstellt.
+
+\chapter{Erfahrungsbericht}\label{Erfahrungsbericht}
+Nach dem objektiven Fazit im vorigen Kapitel, werden hier noch die Erfahrungen
+der beiden Autoren zusammengefasst und ein persönliches Fazit gezogen.
+
+\section{Benjamin Morgan}\label{Erfahrungsbericht Ben}\bmn
+Ich habe an mehreren Softwareprojekte gearbeitet oder mitgearbeitet, jedoch
+noch nicht mit dem strikten testgetriebenen Entwicklungsstil. Wenn ich meine
+Sicht trotzdem äußern darf, dann scheint mir die pure TDD etwas zu
+*masochistisch* für viele Projekte (vorallem die, an denen ich arbeite). Ich glaube
+eine Mischform die eine umfangreiche aber angemessene Menge von Testing
+miteinbezieht könnte sich als sehr hilfreich erweisen. Dieser Stil müsste
+nicht so strikt die Gesetze der TDD einhalten, würde aber troztdem einen
+ähnlichen testgetriebenem Entwicklungsstil an gewissen Stellen einsetzten.
+
+\begin{enumerate}
+    \item Denke das Design gut durch.
+    \item Entwickle eine geeignete API für den Lösungsansatz. Das könnte am
+        besten dadurch geschehen indem man
+        \begin{itemize}
+            \item auf Papier einen Entwurf macht,
+            \item verschiedene Anwendungsfälle durchdenkt und durcharbeitet
+                oder
+            \item Anwendungsbeispiele für die zukünftige API programmiert.
+        \end{itemize}
+        Es könnte sogar durchaus sinnvoll sein, Prototypen oder gar
+        Produktivcode zu schreiben. Oft merkt man, dass der erste Ansatz
+        doch nicht das ist, was man will; wenn man das spät merkt, ist TDD
+        nachteilig, da man bereits viel Zeit mit konkreten Tests verbummelt
+        hat.
+    \item Schreibe umfangreiche Tests für die API (nicht aber unbedingt für die
+        kleine privaten Funktionen). Alle möglichen Ein- und Ausgänge sollen
+        berücksichtigt sein.
+    \item Schreibe den Produktivcode und nutze die zuvor geschriebene Tests,
+        aber vertraue nicht darauf (schalte das Gehirn nicht aus).
+\end{enumerate}
+
+Diese Schritte können mit verschiedener Genauigkeit und Umfang angewendet
+werden. Es sollte möglich sein, mehrere Tests oder mehr Produktivcode am
+Stück zu schreiben, dadurch erspart man dem Programmierer gezwungene
+Kontextwechsel, die seine Produktivität negativ beeinflussen.
+
+Das TDD Paradigma fühlt sich so an als würde sich alles (und zwar ohne
+Ausnahme) um die Tests drehen. Das finde ich ein bisschen extrem; man verliert
+sich leicht darin und vergisst das der Kunde oder der Nutzer in der Regel den
+Produktivcode bekommt, nicht die ganze Testsuite. Ich persönlich hätte viel
+lieber sehr guten Produktivcode als sehr gute Tests (mit schlechtem
+Produktivcode). Vielleicht kann man von den Programmiersprachen
+\emph{Go}\footnote{Siehe die Website \url{http://golang.org}} und
+\emph{D}\footnote{Siehe die Website \url{http://dlang.org}} lernen, denn
+sie integrieren das Testing in die Sprache bzw. Tools und Bibliothek auf einer
+Weise, dass das Testing sehr angenehm macht.
+
+\section{Philipp Jeske}\label{Erfahrungsbericht Philipp}\pje
+Ich habe bereits in kleineren Projekten als auch in mittelgroßen Projekten,
+versucht \gls{tdd} einzusetzen, jedoch gab es einige Probleme.
+
+So stelle sich heraus, dass der Aufwand bereits bei kleinen Projekten ziemlich
+groß ist, wenn man den ganzen Netzwerkstack mocken muss bzw. den Zugriff auf
+eine Datenbank. Ebenso stellte sich heraus, dass es eine Menge Mehraufwand
+erzeugt, wenn sich Anforderungen ändern, da diese dann auch in den Tests
+nachgezogen werden müssen.
+
+Aber es gab nicht nur negative Beispiele, so eignet sich \gls{tdd} meines
+Erachtens um logische Fehler bereits während der Implementierung zu erkennen.
+Auch projektinternen Abhängigkeiten der Art "`Klasse A erbt von
+Klasse C und implementiert Schnittstelle C"' können mit Hilfe von \gls{tdd}
+sehr gut getestet werden.
+
+Aufgrund meiner persönlichen Erfahrungen würde ich weder zu \gls{tdd} raten
+noch davon abraten. Ich würde einen abgespeckten Workflow vorziehen, der den
+Testaufwand auf logische Fehler reduziert, die einfach überprüft werden können
+und die Integrationstests nur auf einfache Fälle wie oben beschrieben
+beschränkt. Für die restlichen Testpunkte bevorzuge ich den klassischen Ansatz,
+da sich der Aufwand dadurch reduziert.
+
+Ferner macht es Sinn, die Tests von spezialisierten Teams schreiben zu lassen,
+da dadurch das Problem der Whitebox-Tests weiter umgangen wird und nicht jeder
+Entwickler tests schreiben will. Ferner spart es Schulungsaufwand.
+
+\printbibliography
+%\bibliographystyle{natdin}
+%\bibliography{literatur}
+
+\printglossary
+
+\end{document}
