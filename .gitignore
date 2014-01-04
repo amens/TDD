@@ -3,9 +3,11 @@
 *.alg
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.dvi
 *.fdb_latexmk
+*.fls
 *.glg
 *.glo
 *.gls
@@ -22,6 +24,7 @@
 *.nav
 *.nlo
 *.out
+*.run.xml
 *.pdfsync
 *.ps
 *.snm

@@ -12,6 +12,8 @@ Uncle Bob's Three Laws of TDD \[[1][1]\]
     to pass the one fialing unit test.
  4. You are not allowed to write untestable code (user comment).
 
+In a sense, a developer only responds to failing tests.
+
 It follows that
 
  - you can't spend much time writing *only* tests or *only* code,
@@ -26,7 +28,15 @@ Summary
 -------
 
 TDD is only a part of the Agile development technique. It consists of *test
-first development* (TFD) and *refactoring*.
+first development* (TFD) and *refactoring*. This turns traditional
+development around, which normally ends with the testing, rather than
+beginning with it.
+
+Some call it a agile requirements and design technique, others see it more
+as a programming technique. Both may be correct, as it depends on how far
+you take TDD.
+
+TDD is a short iterative development cycle.
 
 ### Methods
 
@@ -43,6 +53,8 @@ first development* (TFD) and *refactoring*.
 
  - You are probably going to have more LOC for tests than for the functional
    code. \[[2][2]\] \[[3][3]\]
+ - TDD causes you to write interface heavy code; this can be a good thing,
+   but for small projects it might be excessive.
 
 ### Benefits and Strengths
 
@@ -51,12 +63,21 @@ first development* (TFD) and *refactoring*.
  - transparency in the code;
  - tests that act as documentation and code examples, they are always
    up-to-date;
+ - the tests make up the specification, this is unambiguous and also
+   requires you to think through the specification before you start writing
+   any code;
  - a testable design and code base, because the TDD technique forces the
    design to be testable;
  - the ability to refactor at will, because the tests cover all the code
    paths and functions;
  - no fear of touching the code or deleting code, the code becomes malleable
-   (again) and makes it a lot *softer* again. \[[1][1]\]
+   (again) and makes it a lot *softer* again; \[[1][1]\]
+ - TDD forces the design to be testable, and makes future development by
+   yourself and others a lot easier;
+ - TDD eliminates excuses and short-cuts; you can't be lazy and the
+   management cannot force you to skip the testst when you have a finished
+   product because it seems to work ok (the predefined use-cases go
+   through).
 
 ### Requirements
 
@@ -119,6 +140,10 @@ The requirements above may also be seen as weaknesses.
    properly create tests. \[[5][5]\]
  - The requirement of testable code results in a much more complex design
    than might be necessary for the problem at hand. \[[5][5]\]
+ - If you write the tests and the code yourself, the tests might share the
+   same blind spot as the code afterwards.
+ - There is a possibility of overtesting, which can slow down development
+   and even prevent refactoring.
 
 Ben's Thoughts
 --------------
