@@ -52,19 +52,42 @@
         <p>
             <small>Benjamin Morgan, Philipp Jeske</small>
         </p>
+
+        <aside class=notes>
+            Philipp/Ben und ich wollen euch etwas über die testgetriebene
+            Entwickelung erzählen, vielleicht besser bekannt als test-driven
+            development, oder TDD.
+        </aside>
     </section>
 
 <!-- Einführung: Philipp -->
     <section id=problem>
         <h2>Das Problem</h2>
-        
-        <p>Aufgrund später Tests, unabsehbarer Nachbesserungsaufwand bei komplexen Projekten.</p>
+
+        <p>Aufgrund später Tests, unabsehbarer Nachbesserungsaufwand bei
+        komplexen Projekten.</p>
+
+        <aside class=notes>
+            In der Softwareentwickelung geschieht es doch recht häufig, dass
+            das Testen vernachlässigt, aufgeschoben oder gar übersprungen wird.
+            Dies führt unweigerlich zu einer schlechteren Qualität der
+            Software, und zu einer unabsehbaren Nachbesserungsaufwand. Das
+            Problem wird nur noch schlimmer je mehr Leute an dem Projekt
+            beteiligt sind. Das kann teuer werden.
+        </aside>
     </section>
 
     <section id=loesung>
         <h2>Die Lösung</h2>
-        
-        <p>Früh in der Entwicklung Testen, am besten zeitgleich => TDD</p>
+
+        <p>Früh in der Entwicklung Testen, am besten zeitgleich =&gt; TDD.</p>
+
+        <aside class=notes>
+            Die Lösung könnte sein, früh in der Entwicklung zu testen, ja sogar
+            Zeitgleich mit dem Kodieren der Produktivcode. Man könnte ein
+            Schritt weiter gehen, und fordern, dass die Tests vor der
+            Produktivcode fertig sind. Dieser Ansatz nennt man die
+            Testgetriebene Entwickelung.
     </section>
 
 <!-- Definition: Ben -->
@@ -78,6 +101,21 @@
             <li><em>test-first development</em> (TFD), und
             <li>häufiges Refaktorisieren.
         </ul>
+
+        <aside class=notes>
+            Test-Driven Development ist nicht eine Gesamtentwickelungsstrategie
+            oder -philosophie, sondern nur ein Teil. Sie besteht aus:
+            test-first development und häufiges Refaktorisieren.
+
+            Hierbei ist das Refaktorisieren ein wesentlicher Teil der
+            Strategie. Erstens, die erste Code die man schreibt ist in der
+            Regel nicht die beste. Zweitens, erkennt man oft erst nach einiger
+            Zeit den besten Ansatz. Dann sollte man aber refaktorisieren.
+
+            Zusätzlich bringt TFD alleine nicht genug Vorteile und bringt
+            sogar manche Nachteile mit sich, wenn man das Refaktorisieren
+            weglässt. Wir werden später mehr dazu sagen.
+        </aside>
     </section>
 
     <section id=zyklus>
@@ -90,7 +128,12 @@
             <li>Refaktorisiere den Test- und Produktivcode.
         </ol>
 
-        <p style="font-size: 90%">Der ganze Zyklus soll etwa 3–15 Minuten dauern.</p>
+        <p style="font-size: 90%">
+        Der ganze Zyklus soll etwa 3–15 Minuten dauern.</p>
+
+        <aside class=notes>
+            Wir wollen aber erstmal TDD ein bisschen genauer definieren.
+        </aside>
     </section>
 
     <section>
@@ -112,6 +155,13 @@
             </ol>
 
             <aside class=notes>
+                Eine andere Sicht auf die testgetriebene Entwickelung ist,
+                sie als eine Menge von Regeln oder Gesetzen aufzufassen.
+                Diese hier waren oft im Internet zitiert, und sind ziemlich
+                klar.
+
+                ...
+
                 Der Entwickler reagiert nur auf fehlschlagende Tests.
             </aside>
         </section>
@@ -121,7 +171,11 @@
             <p>Thou shalt write code that can be unit-tested.</p>
 
             <aside class=notes>
-                Allerdings fehlt hier das kritische Refaktorisieren.
+                Natürlich muss man ein Design haben und Code schreiben, dass
+                Unittestbar ist.
+
+                Was fehlt hier?
+                Das kritische Refaktorisieren.
             </aside>
         </section>
 
@@ -153,9 +207,9 @@
 <!-- Umsetzung: Philipp -->
     <section id=umsetzung>
         <h2>Umsetzung</h2>
-        
+
         <p>
-            Die Umsetzung erfolgt in der Praxis häufig mit Unit-Tests, 
+            Die Umsetzung erfolgt in der Praxis häufig mit Unit-Tests,
             mit unterschiedlich starker Mock-Repräsentation
         </p>
     </section>
@@ -164,6 +218,10 @@
     <section id=bewertung>
         <h2>Bewertung</h2>
 
+        <aside class=notes>
+            Wir wollen die Strategie „testgetriebene Entwickelung“
+            bewerten.
+        </aside>
     </section>
 
     <section>
@@ -184,7 +242,8 @@
             <ul>
                 <li>Der Entwicklungsgegenstand hat einen klaren Ansatz
                     und erfordert wenig Experimentieren oder Prototyping.
-                <li>Man kann den Entwicklungsgegenstand logisch in Module zerteilen.
+                <li>Man kann den Entwicklungsgegenstand logisch in Module
+                    zerteilen.
                 <li>Es ist möglich, überall Dependency Injection anzuwenden
                     oder Objekte durch Mockobjekte zu ersetzen.
             </ul>
@@ -265,33 +324,40 @@
 <!-- Fazit: Philipp -->
     <section id=fazit>
         <h2>Fazit</h2>
-        
-        <p>Keine allgemeine Empfehlung möglich, immer eine Einzelfallentscheidung</p>
+
+        <p>Keine allgemeine Empfehlung möglich, immer eine
+        Einzelfallentscheidung</p>
     </section>
 
 <!-- Beispiel: Philipp -->
     <section>
         <section id=beispiele>
-            In folgenden Beispielen TDD einsetzen oder nicht?
+            <h2>TDD einsetzen oder nicht?</h2>
         </section>
+
         <section id=beispiel1>
             <h2>Beispiel 1</h2>
-            <p>Es soll eine neue Version eines Autopiloten entwickelt werden. Der Autopilot 
-            legt anhand von Zielwerten und Messwerten, wie Windgeschwindigkeit, -richtung, Luftdruck,
-            GPS etc., die Winkel der Steuerflächen und die Leistung der Turbinen fest. Das 
-            Management fordert eine hohe Qualität und überprüfbare Korrektheit, damit eine 
+            <p>Es soll eine neue Version eines Autopiloten entwickelt werden.
+            Der Autopilot legt anhand von Zielwerten und Messwerten, wie
+            Windgeschwindigkeit, -richtung, Luftdruck, GPS etc., die Winkel der
+            Steuerflächen und die Leistung der Turbinen fest. Das Management
+            fordert eine hohe Qualität und überprüfbare Korrektheit, damit eine
             Zulassung für den Luftverkehr erfolgen kann.  </p>
         </section>
+
         <section id=beispiel2>
             <h2>Beispiel 2</h2>
-            <p>Es soll eine Applikation entwickelt werden, die über das Netzwerk auf eine
-            Datenbank zugreift und für eine GUI für die CRUD-Operationen bereitstellt. Der
-            Kunde möchte damit ein existierendes System ablösen und seinen Workflow verbessern. Es
-            soll auf einem für das Unternehmen neuen Framework aufbauen und Teilberechnungen sollen
-            über eine proprietäre Drittsoftware umgesetzt werden. Um die Akzeptanz der Anwender zu
-            steigern, werden diese regelmäßige nach Verbesserungsvorschlägen befragt.</p>
+            <p>Es soll eine Applikation entwickelt werden, die über das
+            Netzwerk auf eine Datenbank zugreift und für eine GUI für die
+            CRUD-Operationen bereitstellt. Der Kunde möchte damit ein
+            existierendes System ablösen und seinen Workflow verbessern. Es
+            soll auf einem für das Unternehmen neuen Framework aufbauen und
+            Teilberechnungen sollen über eine proprietäre Drittsoftware
+            umgesetzt werden. Um die Akzeptanz der Anwender zu steigern, werden
+            diese regelmäßige nach Verbesserungsvorschlägen befragt.</p>
         </section>
     </section>
+
 <!-- Ende -->
     <section>
         <section id=danke>
