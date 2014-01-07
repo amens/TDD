@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{mitschrift}
-\LoadClass[a4paper,10pt,draft]{scrreprt}
+\LoadClass[a4paper,10pt]{scrreprt}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[ngerman]{babel}	
 \RequirePackage{amsmath}
