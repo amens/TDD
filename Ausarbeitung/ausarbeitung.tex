@@ -1,4 +1,10 @@
-\documentclass{mitschrift}
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[ngerman]{babel}
+
+\newtheorem{beispiel}{Beispiel}[section]
+\newcommand{\beispielautorefname}{Beispiel}
 
 % Includes
 \usepackage{biblatex}
@@ -12,12 +18,13 @@
 \makeatother
 \urlstyle{leo}
 
+\usepackage{color}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
-    citecolor=grey,
+    citecolor=black,
     filecolor=black,
-    linkcolor=blue,
+    linkcolor=black,
     urlcolor=black
 }
 
@@ -82,7 +89,7 @@
  persönlicher Erfahrungsbericht der beiden Autoren dieser Arbeit.
 \end{abstract}
 
-\chapter{Einführung}\label{Einfuehrung}\pje
+\section{Einführung}\label{Einfuehrung}\pje
 Bei den klassischen Entwicklungsmodellen werden Tests erst nach Fertigstellung
 einzelner Module ausgeführt, dies führt dazu, dass unter Umstände viele
 Nacharbeiten nötig sind bevor mit dem nächsten Modul angefangen werden kann.
@@ -104,7 +111,7 @@ geschrieben werden, wird auch teilweise bereits auf Vollständigkeit geprüft. I
 folgenden Kapitel wird auf die genaue Definition von Testgetriebener
 Entwicklung genauer eingegangen.
 
-\chapter{Definition}\label{Definition}\bmn
+\section{Definition}\label{Definition}\bmn
 Testgetriebene Entwickelung (engl.\ \emph{test-driven development}, auch TDD)
 ist ein Teil der agile Softwareentwickelung, bestehend aus \emph{test-first
 development} (TFD) und Refaktorisierung. Die Tests werden zuerst geschrieben und
@@ -165,13 +172,13 @@ Ein signifikanter Nebeneffekt von TDD oder TFD im Allgemeinen ist, dass man
 sehr viel Testcode generiert. In der Regel rechnet man mit mindestens so viel
 Testcode wie man Produktivcode hat. \cite{SQlite3, C2}
 
-\chapter{Umsetzung}\label{Umsetzung}\pje
+\section{Umsetzung}\label{Umsetzung}\pje
 Die Umsetzung der \gls{tdd} erfolgt in mehren Stufen und findet auf
 unterschiedlichen Integrationsebenen statt. Je nach Ebene werden
 unterschiedliche Praktiken und Tools angewendet, auf die im Folgenden näher
 eingegangen wird.
 
-\section{Unit-Tests}
+\subsection{Unit-Tests}
 Die bekannteste Testtechnik in der Softwareentwicklung sind wahrscheinlich die
 \textsc{Unit}- bzw. Modultests. Diese werden häufig mit Hilfe von in die
 Entwicklungssprache und die \gls{ide} integrierte Testframeworks durchgeführt.
@@ -198,7 +205,7 @@ Die Unit-Tests werden bei Anwendung des Paradigmas der \gls{tdd} bei jeder
 kleinsten Änderung ausgeführt und die Entwicklung wird erst durchgeführt,
 sobald der entsprechende Test fehlerfrei durchläuft.
 
-\section{Integrationtests}
+\subsection{Integrationtests}
 Bei den Integrationstests, die häufig auch noch mit den Testframeworks
 durchgeführt werden, werden in einzelnen Iterationen die Mock-Objekte durch ihr
 reales Pendant ersetzt und dadurch kontrolliert, dass die Zusammenarbeit der
@@ -212,7 +219,7 @@ des Datenbankzugriffes neben dem Mock-Objekt-Test auch direkt der
 Datenbankzugriff getestet, um frühzeitig Probleme bzw. Fehler zu erkennen und
 diese in einem frühen Stadium beheben zu können.
 
-\section{Systemtest}
+\subsection{Systemtest}
 Sind alle Teile einer Anwendung erfolreich mit Modultests und Integrationstests
 getestet, kann die letzte Iteration der Integrationstests durchgeführt werden.
 Diese wird auch häufig als Systemtest bezeichnet und ist der erste Test, bei
@@ -224,15 +231,15 @@ Iteration des Refactor/Debug-Zyklus neben Unit-Tests und den Integrationstests
 ausgeführt auch bei diesem Test gilt, die Entwicklung wird erst fortgesetzt,
 wenn alle Tests erneut erfolreich bestanden sind.
 
-%\chapter{Beispiel}\label{Beispiel}\pje
+%\section{Beispiel}\label{Beispiel}\pje
 
-\chapter{Bewertung}\label{cpt:Bewertung}\bmn
+\section{Bewertung}\label{cpt:Bewertung}\bmn
 Es ist nicht immer offensichtlich, was die Vor- und Nachteile von TDD sind. Manchmal
 kommt es drauf an, wie genau man TDD anwendet, ob eine Eigenschaft von TDD
 ein Nachteil oder ein Vorteil ist. Es gibt auch Vorraussetzungen, die erfüllt
 sein sollten, um TDD sinnvoll anzuwenden.
 
-\section{Vorraussetzungen}\label{sec:Vorraussetzungen}
+\subsection{Vorraussetzungen}\label{sec:Vorraussetzungen}
 Bill Landers auf \emph{StackExchange} \cite{StackExchange} hat prägnant
 zusammengefasst, welche Voraussetzungen erfüllt werden müssen, dass man von TDD
 richtig profitieren kann:
@@ -263,7 +270,7 @@ anzuwenden, allerdings sollte man besonders Acht geben, dass man keine Teile
 des Codebases benachteiligt, weil sie nicht mittels dem TDD Paradigma
 entwickelt werden.
 
-\section{Vorteile}\label{sec:Vorteile}
+\subsection{Vorteile}\label{sec:Vorteile}
 
 Für Softwareprojekte die mit TDD entwickelt werden, gibt es verschiedene
 Vorteile.
@@ -294,7 +301,7 @@ In der Tat ist TDD ein effektives Werkzeug gegen die menschliche Natur; wenn
 ein Softwareprodukt fertig ist, neigt man oft dazu, nicht mehr zu testen wenn
 alles im grünen Bereich zu sein \emph{scheint}. TDD beugt diesem vor.
 
-\section{Nachteile}\label{sec:Nachteile}
+\subsection{Nachteile}\label{sec:Nachteile}
 
 Die Vorraussetzungen von TDD können auch als Nachteile gesehen werden.
 Obwohl TDD Vorteile bringt, ist der Zusatzaufwand nicht Umsonst. Nicht nur
@@ -364,7 +371,7 @@ dagegen wirken kann.
         nicht mehr der Fall sein.
 \end{itemize}
 
-\chapter{Fazit}\label{Fazit}\pje
+\section{Fazit}\label{Fazit}\pje
 Nachdem im vorigen Kapitel die Vorteile und Nachteile von \gls{tdd} aufgezeigt wurden,
 soll in diesem Kapitel versucht werden objektiv einzuordnen, wann und wo \gls{tdd} sinnvoll
 eingesetzt werden kann, bevor im folgenden Kapitel eine subjektive empirische 
@@ -437,11 +444,11 @@ die sich lediglich in der Erstellung der Tests vom gängigen \gls{tdd} untersche
 bei der \gls{edd} die Testfälle nicht anhand der formalen Spezifikation, sondern
 anhand gemeinsam mit dem Kunden erarbeiteten Beispielen erstellt.
 
-\chapter{Erfahrungsbericht}\label{Erfahrungsbericht}
+\section{Erfahrungsbericht}\label{Erfahrungsbericht}
 Nach dem objektiven Fazit im vorigen Kapitel, werden hier noch die Erfahrungen
 der beiden Autoren zusammengefasst und ein persönliches Fazit gezogen.
 
-\section{Benjamin Morgan}\label{Erfahrungsbericht Ben}\bmn
+\subsection{Benjamin Morgan}\label{Erfahrungsbericht Ben}\bmn
 Ich habe an mehreren Softwareprojekte gearbeitet oder mitgearbeitet, jedoch
 noch nicht mit dem strikten testgetriebenen Entwicklungsstil. Wenn ich meine
 Sicht trotzdem äußern darf, dann scheint mir die pure TDD etwas zu
@@ -489,7 +496,7 @@ Produktivcode). Vielleicht kann man von den Programmiersprachen
 sie integrieren das Testing in die Sprache bzw. Tools und Bibliothek auf einer
 Weise, dass das Testing sehr angenehm macht.
 
-\section{Philipp Jeske}\label{Erfahrungsbericht Philipp}\pje
+\subsection{Philipp Jeske}\label{Erfahrungsbericht Philipp}\pje
 Ich habe bereits in kleineren Projekten als auch in mittelgroßen Projekten,
 versucht \gls{tdd} einzusetzen, jedoch gab es einige Probleme.
 
