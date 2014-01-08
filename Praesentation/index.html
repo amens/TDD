@@ -88,6 +88,7 @@
             Schritt weiter gehen, und fordern, dass die Tests vor der
             Produktivcode fertig sind. Dieser Ansatz nennt man die
             Testgetriebene Entwickelung.
+        </aside>
     </section>
 
 <!-- Definition: Ben -->
@@ -195,13 +196,45 @@
                 Es entstehen viele kleine Kontextwechsel zwischen
                 Produktivcode und Testcode schreiben.
             <li>
-                Das Konfigurationsmanagement sowie Entwicklungsumgebung
-                spielen bei TDD eine große Rolle.
-            <li>
                 Ein signifikanter Nebeneffekt ist die Menge der erzeugten
                 Tests, der in der Regel mindestens so groß wie der
                 Produktivcode ist.
+            <li>
+                Das Konfigurationsmanagement sowie Entwicklungsumgebung
+                spielen bei TDD eine große Rolle.
         </ul>
+
+        <aside class=notes>
+            An dieser Stelle würde ich gern ein paar Bemerkungen zu TDD
+            loswerden.
+
+            1. Wenn man einen so kurzen Zyklus hat wie wir gesehen haben,
+               dann entstehen als Folge ziemlich viele Kontextwechsel
+               zwischen Produktivcode und Testcode schreiben. Das kann
+               einen negativen Effekt auf die Produktivität haben, oder
+               auch einen positiven. Es ist möglich z.B., dass die Tests
+               den Programmierer helfen, den roten Faden nicht zu verlieren.
+
+            2. In jedem Zyklus muss man mehrmals kompilieren und Tests
+               ausführen. Wenn 20 Mann an einem Softwareprojekt arbeiten
+               und jeder schreibt einen neuen Test jede Stunde, dann sind an
+               einem Tag 20 * 6 = 120 Tests geschrieben. Man schätzt am Ende
+               mit genausoviel Testcode wie Produktivcode. So viel Testen
+               erfordert eine geeignete Testframework.
+
+            3. Die Entwickelungsumgebung muss das häufige Neu-kompilieren und
+               das Ausführen solch einer Menge von Tests unterstützen können.
+               Projekte die auch nur Minuten brauchen um zu kompilieren sind
+               dann doch schon kritisch, geschweige denn die Projekte die
+               Stunden brauchen!
+
+               Zusätzlich spielt die Konfigurationsmanagement eine große Rolle.
+               Es soll möglich sein, schnell den aktuellen Zustand zu „commiten“
+               sowie einen früheren wiederherzustellen. Denn eine häufig genannter
+               Vorteil von TDD ist, dass wenn etwas nicht funktioniert, es oft
+               leichter und einfacher ist, den letzt besten Zustand zu „laden“,
+               als rum zu Debuggen.
+        </aside>
     </section>
 
 <!-- Umsetzung: Philipp -->
